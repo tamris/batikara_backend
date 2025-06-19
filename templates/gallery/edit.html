@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Galeri Batik</title>
+</head>
+<body>
+    <h1>Edit Galeri Batik</h1>
+    <form action="{{ url_for('gallery.web_gallery_edit', id=gallery.id) }}" method="post" enctype="multipart/form-data">
+        <label>Nama Batik:</label><br>
+        <input type="text" name="nama_batik" value="{{ gallery.nama_batik }}" required><br><br>
+
+        <label>Deskripsi:</label><br>
+        <textarea name="deskripsi" rows="4" cols="50" required>{{ gallery.deskripsi }}</textarea><br><br>
+
+        <label>Gambar Saat Ini:</label><br>
+        <img src="{{ gallery.image }}" width="150"><br><br>
+
+        <label>Ganti Gambar (opsional):</label><br>
+        <input type="file" name="image" accept="image/*"><br><br>
+
+        <button type="submit">Update</button>
+        <a href="{{ url_for('gallery.web_gallery_index') }}">Batal</a>
+    </form>
+</body>
+</html>

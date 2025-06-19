@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Artikel</title>
+</head>
+<body>
+    <h1>Tambah Artikel</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Judul" required><br>
+        <textarea name="description" placeholder="Deskripsi" required></textarea><br>
+        <input type="file" name="image" accept="image/*" required><br>
+        <button type="submit">Simpan</button>
+    </form>
+    <a href="{{ url_for('article.web_article_index') }}">Kembali</a>
+</body>
+</html>

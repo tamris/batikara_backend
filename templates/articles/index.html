@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Artikel</title>
+</head>
+<body>
+    <h1>Daftar Artikel</h1>
+    <a href="{{ url_for('article.web_article_create') }}">+ Tambah Artikel</a>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h3>{{ article.title }}</h3>
+                <img src="{{ article.image_url }}" width="100" />
+                <p>{{ article.description }}</p>
+                <p><small>Dibuat: {{ article.created_at }}</small></p>
+                <a href="{{ url_for('article.web_article_edit', id=article.id) }}">Edit</a>
+                <form action="{{ url_for('article.web_article_delete', id=article.id) }}" method="POST" style="display:inline;">
+                    <button type="submit">Hapus</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

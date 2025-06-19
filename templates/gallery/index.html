@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Galeri Batik</title>
+</head>
+<body>
+    <h1>Galeri Batik</h1>
+
+    <a href="{{ url_for('gallery.web_gallery_create') }}">Tambah Galeri</a>
+    <br><br>
+
+    <ul>
+    {% for g in galleries %}
+        <li>
+            <strong>{{ g.nama_batik }}</strong><br>
+            <img src="{{ g.image }}" width="150"><br>
+            <p>{{ g.deskripsi }}</p>
+            <a href="{{ url_for('gallery.web_gallery_edit', id=g.id) }}">Edit</a> |
+            <form action="{{ url_for('gallery.web_gallery_delete', id=g.id) }}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+            </form>
+        </li>
+        <hr>
+    {% endfor %}
+    </ul>
+</body>
+</html>

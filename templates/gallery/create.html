@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Galeri Batik</title>
+</head>
+<body>
+    <h1>Tambah Galeri Batik</h1>
+    <form action="{{ url_for('gallery.web_gallery_create') }}" method="post" enctype="multipart/form-data">
+        <label>Nama Batik:</label><br>
+        <input type="text" name="nama_batik" required><br><br>
+
+        <label>Deskripsi:</label><br>
+        <textarea name="deskripsi" rows="4" cols="50" required></textarea><br><br>
+
+        <label>Gambar:</label><br>
+        <input type="file" name="image" accept="image/*" required><br><br>
+
+        <button type="submit">Simpan</button>
+        <a href="{{ url_for('gallery.web_gallery_index') }}">Kembali</a>
+    </form>
+</body>
+</html>
