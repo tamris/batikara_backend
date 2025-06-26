@@ -1,0 +1,13 @@
+<h2>Daftar Video Edukasi</h2>
+<a href="{{ url_for('video_bp.create') }}">Tambah Video</a>
+<ul>
+  {% for video in videos %}
+    <li>
+      <strong>{{ video.title }}</strong><br>
+      {{ video.description }}<br>
+      <a href="{{ video.youtubeUrl }}" target="_blank">Tonton</a> |
+      <a href="{{ url_for('video_bp.edit', id=video._id) }}">Edit</a> |
+      <a href="{{ url_for('video_bp.delete', id=video._id) }}">Hapus</a>
+    </li>
+  {% endfor %}
+</ul>

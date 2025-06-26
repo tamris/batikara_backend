@@ -10,6 +10,8 @@ from routes.article_routes import article_bp
 from routes.gallery_routes import gallery_bp
 from routes.favorite_routes import favorite_bp
 from routes.user_routes import user_bp
+from routes.video_routes import video_bp
+from routes.batik_place_routes import batik_place_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -33,6 +35,9 @@ app.register_blueprint(article_bp)
 app.register_blueprint(user_bp)
 app.register_blueprint(gallery_bp)
 app.register_blueprint(favorite_bp)
+app.register_blueprint(video_bp)
+app.register_blueprint(batik_place_bp)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,23 @@
+<h2>Daftar Lokasi Batik</h2>
+<a href="{{ url_for('batik_place_bp.create') }}">Tambah Lokasi</a>
+<table border="1">
+  <tr>
+    <th>Nama</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Deskripsi</th>
+    <th>Aksi</th>
+  </tr>
+  {% for p in places %}
+  <tr>
+    <td>{{ p.name }}</td>
+    <td>{{ p.latitude }}</td>
+    <td>{{ p.longitude }}</td>
+    <td>{{ p.description }}</td>
+    <td>
+      <a href="{{ url_for('batik_place_bp.edit', id=p._id) }}">Edit</a> |
+      <a href="{{ url_for('batik_place_bp.delete', id=p._id) }}" onclick="return confirm('Hapus data?')">Hapus</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>

@@ -1,0 +1,9 @@
+<h2>Edit Lokasi Batik</h2>
+<form method="post">
+  Nama: <input type="text" name="name" value="{{ place.name }}"><br>
+  Latitude: <input type="text" name="latitude" value="{{ place.latitude }}"><br>
+  Longitude: <input type="text" name="longitude" value="{{ place.longitude }}"><br>
+  Deskripsi: <input type="text" name="description" value="{{ place.description }}"><br>
+  <button type="submit">Update</button>
+</form>
+<a href="{{ url_for('batik_place_bp.index') }}">Kembali</a>
