@@ -20,3 +20,10 @@ def create_user(data):
 
 def find_user_by_email(email):
     return current_app.mongo.db.users.find_one({"email": email})
+
+
+def update_user_password(email, new_password_hash):
+    current_app.mongo.db.users.update_one(
+        {"email": email},
+        {"$set": {"password": new_password_hash}}
+    )

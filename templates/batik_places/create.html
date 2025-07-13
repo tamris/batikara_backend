@@ -1,9 +1,86 @@
-<h2>Tambah Lokasi Batik</h2>
-<form method="post">
-  Nama: <input type="text" name="name"><br>
-  Latitude: <input type="text" name="latitude"><br>
-  Longitude: <input type="text" name="longitude"><br>
-  Deskripsi: <input type="text" name="description"><br>
-  <button type="submit">Simpan</button>
-</form>
-<a href="{{ url_for('batik_place_bp.index') }}">Kembali</a>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tambah Lokasi Batik - Admin BatikKara</title>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/event-create.css') }}" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">Admin BatikKara</span>
+    </a>
+    <ul class="side-menu top">
+      <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
+      <li class="menu-label"><span class="text">Master Data</span></li>
+      <li><a href="{{ url_for('gallery.web_gallery_index') }}"><i class='bx bxs-shopping-bag-alt'></i><span class="text">Data Batik</span></a></li>
+      <li><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video'></i><span class="text">Data Video</span></a></li>
+      <li><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span class="text">Data Artikel</span></a></li>
+      <li><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span class="text">Data Event</span></a></li>
+      <li class="active"><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map'></i><span class="text">Data Mapping</span></a></li>
+      <li><a href="{{ url_for('auth_web.logout') }}" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
+    </ul>
+  </section>
+
+  <!-- CONTENT -->
+  <section id="content">
+    <nav>
+      <i class='bx bx-menu'></i>
+      <a href="#" class="nav-link">Tambah Lokasi Batik</a>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h2>Tambah Lokasi Batik</h2>
+
+        <!-- FORM INPUT -->
+        <form method="POST" class="form-box" action="{{ url_for('batik_place_bp.create') }}">
+          <label for="name">Nama</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="latitude">Latitude</label>
+          <input type="text" id="latitude" name="latitude" required>
+
+          <label for="longitude">Longitude</label>
+          <input type="text" id="longitude" name="longitude" required>
+
+          <label for="description">Deskripsi</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
+
+          <label for="address">Alamat</label>
+          <textarea id="address" name="address" rows="3" required></textarea>
+
+          <div class="actions">
+            <button type="submit" class="btn-submit"><i class='bx bx-check'></i> Simpan</button>
+            <a href="{{ url_for('batik_place_bp.index') }}" class="btn-cancel">Batal</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <!-- SCRIPT NOTIFIKASI -->
+  <script>
+    window.onload = function () {
+      const popup = document.getElementById("popup");
+      if (popup) {
+        popup.style.display = "block";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 3000);
+      }
+    };
+  </script>
+
+</body>
+
+</html>

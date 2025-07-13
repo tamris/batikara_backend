@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Dashboard - Admin BatikKara</title>
+
+	<!-- Boxicons CDN -->
+	<link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}" />
+
+	<!-- Chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Admin BatikKara</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="{{ url_for('dashboard.admin_dashboard') }}">
+					<i class='bx bxs-dashboard'></i><span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="menu-label"><span class="text">Master Data</span></li>
+			<li>
+				<a href="{{ url_for('gallery.web_gallery_index') }}">
+					<i class='bx bxs-shopping-bag-alt'></i><span class="text">Data Batik</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('video_bp.index') }}">
+					<i class='bx bxs-video'></i><span class="text">Data Video</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('article.web_article_index') }}">
+					<i class='bx bxs-news'></i><span class="text">Data Artikel</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('event_web.event_index') }}">
+					<i class='bx bxs-calendar-event'></i><span class="text">Data Event</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('batik_place_bp.index') }}">
+					<i class='bx bxs-map'></i><span class="text">Data Mapping</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('auth_web.logout') }}" class="logout">
+					<i class='bx bxs-log-out-circle'></i><span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+
+	</section>
+
+	<!-- CONTENT -->
+	<section id="content">
+		<nav>
+			<i class='bx bx-menu'></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search..." />
+					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden />
+			<label for="switch-mode" class="switch-mode"></label>
+
+			<!-- Notification Dropdown -->
+			<div class="notification-dropdown">
+				<i class='bx bxs-bell' onclick="toggleNotification()"></i>
+				<span class="num">3</span>
+				<div class="notif-panel" id="notifPanel">
+					<h4>Notifications</h4>
+					<ul>
+						<li><i class='bx bxs-bell'></i>Website will be down for maintenance this Saturday<span
+								class="time">2 mins ago</span></li>
+						<li><i class='bx bxs-error-circle' style="color:tomato;"></i>A user reported an unexpected
+							error<span class="time">5 mins ago</span></li>
+						<li><i class='bx bxs-user-plus'></i>A new user has registered<span class="time">12 mins
+								ago</span></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Profile Dropdown -->
+			<div class="profile-dropdown">
+				<img src="{{ url_for('static', filename='img/people.png') }}" alt="profile" class="profile-img"
+					onclick="toggleProfileDropdown()" />
+				<div class="dropdown-content" id="profileDropdown">
+					<div class="profile-info">
+						<img src="{{ url_for('static', filename='img/people.png') }}" alt="profile"
+							class="profile-picture" />
+						<h4>Admin</h4>
+						<p>admin@example.com</p>
+					</div>
+					<hr />
+					<a href="#"><i class='bx bx-cog'></i> Settings</a>
+					<a href="{{ url_for('auth_web.logout') }}"><i class='bx bx-power-off'></i> Logout</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li><a href="#">Dashboard</a></li>
+						<li><i class='bx bx-chevron-right'></i></li>
+						<li><a class="active" href="#">Home</a></li>
+					</ul>
+				</div>
+				<!-- <a href="#" class="btn-download"><i class='bx bxs-cloud-download'></i><span class="text">Download
+						PDF</span></a> -->
+			</div>
+
+			<!-- INFO BOXES -->
+			<ul class="box-info">
+				<li><i class='bx bxs-user'></i><span class="text">
+						<h3>{{ user_count }}</h3>
+						<p>Users</p>
+					</span></li>
+				<li><i class='bx bxs-collection'></i><span class="text">
+						<h3>{{ batik_count }}</h3>
+						<p>Batik</p>
+					</span></li>
+					<li><i class='bx bxs-news'></i><span class="text">
+						<h3>{{ article_count }}</h3>
+						<p>Artikel</p>
+					</span></li>
+					<li><i class='bx bxs-calendar-event'></i><span class="text">
+						<h3>{{ event_count }}</h3>
+						<p>Event</p>
+					</span></li>
+					<li><i class='bx bxs-video''></i><span class="text">
+						<h3>{{ video_count }}</h3>
+						<p>Video</p>
+					</span></li>
+					<li><i class='bx bxs-map'></i><span class="text">
+							<h3>{{ mapping_count }}</h3>
+							<p>Mapping</p>
+						</span></li>
+				</ul>
+
+			<!-- CHARTS -->
+			<!-- <div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Aktivitas Login User per Bulan</h3>
+					</div>
+					<canvas id="loginChart" height="200"></canvas>
+				</div>
+				<div class="todo">
+					<div class="head">
+						<h3>Users</h3>
+					</div>
+					<canvas id="genderChart" height="200"></canvas>
+				</div>
+			</div>
+		</main>
+	</section> -->
+
+	<!-- JavaScript -->
+	<script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+	
+</body>
+
+</html>

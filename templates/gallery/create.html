@@ -1,22 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+
 <head>
-    <title>Tambah Galeri Batik</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Galeri Batik - Admin BatikKara</title>
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/event-create.css') }}" />
 </head>
+
 <body>
-    <h1>Tambah Galeri Batik</h1>
-    <form action="{{ url_for('gallery.web_gallery_create') }}" method="post" enctype="multipart/form-data">
-        <label>Nama Batik:</label><br>
-        <input type="text" name="nama_batik" required><br><br>
 
-        <label>Deskripsi:</label><br>
-        <textarea name="deskripsi" rows="4" cols="50" required></textarea><br><br>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">Admin BatikKara</span>
+        </a>
+        <ul class="side-menu top">
+            <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span
+                        class="text">Dashboard</span></a></li>
+            <li class="menu-label"><span class="text">Master Data</span></li>
+            <li class="active"><a href="{{ url_for('gallery.web_gallery_index') }}"><i
+                        class='bx bxs-shopping-bag-alt'></i><span class="text">Data Batik</span></a></li>
+            <li><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video'></i><span class="text">Data Video</span></a></li>
+            <li><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span class="text">Data
+                        Artikel</span></a></li>
+            <li><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span
+                        class="text">Data Event</span></a></li>
+            <li><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map'></i><span class="text">Data Mapping</span></a></li>
+            <li><a href="/logout" class="logout"><i class='bx bxs-log-out-circle'></i><span
+                        class="text">Logout</span></a></li>
+        </ul>
+    </section>
 
-        <label>Gambar:</label><br>
-        <input type="file" name="image" accept="image/*" required><br><br>
+    <!-- CONTENT -->
+    <section id="content">
+        <nav>
+            <i class='bx bx-menu'></i>
+            <a href="#" class="nav-link">Tambah Galeri Batik</a>
+        </nav>
 
-        <button type="submit">Simpan</button>
-        <a href="{{ url_for('gallery.web_gallery_index') }}">Kembali</a>
-    </form>
+        <main>
+            <div class="container">
+                <h2>Tambah Galeri Batik</h2>
+
+                <!-- FORM INPUT -->
+                <form method="POST" enctype="multipart/form-data" action="{{ url_for('gallery.web_gallery_create') }}"
+                    class="form-box">
+                    <label for="nama_batik">Motif Batik</label>
+                    <input type="text" id="nama_batik" name="nama_batik" placeholder="Masukkan Motif Batik" required>
+
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Tuliskan deskripsi batik..."
+                        required></textarea>
+
+                    <label for="image">Foto Batik</label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+
+                    <div class="actions">
+                        <button type="submit" class="btn-submit"><i class='bx bx-check'></i> Simpan</button>
+                        <a href="{{ url_for('gallery.web_gallery_index') }}" class="btn-cancel">Batal</a>
+                    </div>
+                </form>
+
+
+                <!-- NOTIFIKASI -->
+                {% if request.args.get("sukses") == "1" %}
+                <div id="popup" class="popup">
+                    <span class="popup-icon">&#10003;</span>
+                    Galeri berhasil ditambahkan!
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </section>
+
+    <!-- SCRIPT NOTIFIKASI -->
+    <script>
+        window.onload = function () {
+            const popup = document.getElementById("popup");
+            if (popup) {
+                popup.style.display = "block";
+                setTimeout(() => {
+                    popup.style.display = "none";
+                }, 3000);
+            }
+        };
+    </script>
+
 </body>
+
 </html>

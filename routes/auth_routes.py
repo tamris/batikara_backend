@@ -103,4 +103,3 @@ def get_login_history():
     user_id = get_jwt_identity()
     history = get_login_logs_by_user(user_id)
     return jsonify(history), 200
-

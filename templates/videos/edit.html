@@ -1,7 +1,105 @@
-<h2>Edit Video</h2>
-<form method="POST">
-  <input type="text" name="title" value="{{ video.title }}" required><br>
-  <textarea name="description" required>{{ video.description }}</textarea><br>
-  <input type="url" name="youtubeUrl" value="{{ video.youtubeUrl }}" required><br>
-  <button type="submit">Update</button>
-</form>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Video Edukasi - Admin BatikKara</title>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/event-create.css') }}" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">Admin BatikKara</span>
+    </a>
+    <ul class="side-menu top">
+      <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
+      <li class="menu-label"><span class="text">Master Data</span></li>
+      <li><a href="{{ url_for('gallery.web_gallery_index') }}"><i class='bx bxs-shopping-bag-alt'></i><span class="text">Data Batik</span></a></li>
+      <li class="active"><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video'></i><span class="text">Data Video</span></a></li>
+      <li><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span class="text">Data Artikel</span></a></li>
+      <li><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span class="text">Data Event</span></a></li>
+      <li><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map''></i><span class="text">Data Mapping</span></a></li>
+      <li><a href="/logout" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
+    </ul>
+  </section>
+
+  <!-- CONTENT -->
+  <section id="content">
+    <nav>
+      <i class='bx bx-menu'></i>
+      <a href="#" class="nav-link">Edit Video</a>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h2>Edit Video Edukasi</h2>
+
+        <!-- FORM EDIT -->
+        <form method="POST" action="{{ url_for('video_bp.edit', id=video._id) }}" class="form-box">
+
+          <label for="title">Judul Video</label>
+          <input type="text" id="title" name="title" value="{{ video.title }}" required>
+
+          <label for="description">Deskripsi</label>
+          <textarea id="description" name="description" rows="4" required>{{ video.description }}</textarea>
+
+          <label for="youtubeUrl">URL YouTube</label>
+          <input type="url" id="youtubeUrl" name="youtubeUrl" value="{{ video.youtubeUrl }}" required oninput="updateThumbnail()" />
+
+          <div id="thumbnail-preview" style="margin-top: 10px;">
+            {% if video.youtubeUrl %}
+              {% set youtube_id = None %}
+              {% if 'v=' in video.youtubeUrl %}
+                {% set youtube_id = video.youtubeUrl.split('v=')[-1].split('&')[0] %}
+              {% elif 'youtu.be/' in video.youtubeUrl %}
+                {% set youtube_id = video.youtubeUrl.split('youtu.be/')[-1].split('?')[0] %}
+              {% endif %}
+              {% if youtube_id %}
+                <img id="yt-thumb" src="https://img.youtube.com/vi/{{ youtube_id }}/0.jpg" alt="Thumbnail" width="320" style="border-radius: 10px;">
+              {% endif %}
+            {% endif %}
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn-submit"><i class='bx bx-check'></i> Simpan Perubahan</button>
+            <a href="{{ url_for('video_bp.index') }}" class="btn-cancel">Batal</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <script>
+    function getYouTubeId(url) {
+      let id = null;
+      if (url.includes('v=')) {
+        id = url.split('v=')[1].split('&')[0];
+      } else if (url.includes('youtu.be/')) {
+        id = url.split('youtu.be/')[1].split('?')[0];
+      }
+      return id;
+    }
+
+    function updateThumbnail() {
+      const url = document.getElementById("youtubeUrl").value;
+      const id = getYouTubeId(url);
+      const thumbContainer = document.getElementById("thumbnail-preview");
+      if (id) {
+        thumbContainer.innerHTML = `<img id="yt-thumb" src="https://img.youtube.com/vi/${id}/0.jpg" alt="Thumbnail" width="320" style="border-radius: 10px;">`;
+      } else {
+        thumbContainer.innerHTML = `<span style="color:gray;">URL tidak valid</span>`;
+      }
+    }
+  </script>
+
+</body>
+
+</html>

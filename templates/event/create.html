@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tambah Event - Admin BatikKara</title>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/event-create.css') }}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">Admin BatikKara</span>
+    </a>
+    <ul class="side-menu top">
+      <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span
+            class="text">Dashboard</span></a></li>
+      <li class="menu-label"><span class="text">Master Data</span></li>
+      <li><a href="{{ url_for('gallery.web_gallery_index') }}"><i class='bx bxs-shopping-bag-alt'></i><span
+            class="text">Data Batik</span></a></li>
+      <li><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video'></i><span class="text">Data
+            Video</span></a></li>
+      <li><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span class="text">Data
+            Artikel</span></a></li>
+      <li class="active"><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span
+            class="text">Data Event</span></a></li>
+      <li><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map'></i><span class="text">Data
+            Mapping</span></a></li>
+      <li><a href="{{ url_for('auth_web.logout') }}" class="logout"><i class='bx bxs-log-out-circle'></i><span
+            class="text">Logout</span></a></li>
+    </ul>
+  </section>
+
+  <!-- CONTENT -->
+  <section id="content">
+    <nav>
+      <i class='bx bx-menu'></i>
+      <a href="#" class="nav-link">Tambah Event</a>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h2>Tambah Event</h2>
+
+        <!-- FORM INPUT -->
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('event_web.create_event_route') }}">
+          <label for="judul">Judul Event</label>
+          <input type="text" id="judul" name="judul" placeholder="Masukkan judul event" required>
+
+          <label for="lokasi">Lokasi</label>
+          <input type="text" id="lokasi" name="lokasi" placeholder="Lokasi pelaksanaan" required>
+
+          <label for="waktu">Waktu Pelaksanaan</label>
+          <input type="text" id="waktu" name="waktu" placeholder="Pilih tanggal" required>
+
+          <label for="deskripsi">Deskripsi</label>
+          <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Tuliskan deskripsi event..."
+            required></textarea>
+
+          <label for="foto">Foto Event</label>
+          <input type="file" id="foto" name="foto" accept="image/*" required>
+
+          <div class="actions">
+            <button type="submit" class="btn-submit"><i class='bx bx-check'></i> Simpan Event</button>
+            <a href="{{ url_for('event_web.event_index') }}" class="btn-cancel">Batal</a>
+          </div>
+        </form>
+
+        <!-- NOTIFIKASI -->
+        {% if request.args.get("sukses") == "1" %}
+        <div id="popup" class="popup">
+          <span class="popup-icon">&#10003;</span>
+          Event berhasil ditambahkan!
+        </div>
+        {% endif %}
+      </div>
+    </main>
+  </section>
+
+  <!-- SCRIPT NOTIFIKASI -->
+  <script>
+    window.onload = function () {
+      const popup = document.getElementById("popup");
+      if (popup) {
+        popup.style.display = "block";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 3000);
+      }
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr("#waktu", {
+      dateFormat: "Y-m-d", // Format sesuai kebutuhan backend-mu
+      altInput: true,
+      altFormat: "d F Y"
+    });
+  </script>
+
+
+</body>
+
+</html>

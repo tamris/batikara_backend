@@ -15,16 +15,19 @@ def create():
         lat = float(request.form["latitude"])
         lng = float(request.form["longitude"])
         desc = request.form["description"]
+        address = request.form["address"]  # Tambahan
 
         current_app.mongo.db.batik_places.insert_one({
             "name": name,
             "latitude": lat,
             "longitude": lng,
-            "description": desc
+            "description": desc,
+            "address": address  # Tambahan
         })
         return redirect(url_for("batik_place_bp.index"))
 
     return render_template("create.html")
+
 
 @batik_place_bp.route("/batik-places/edit/<id>", methods=["GET", "POST"])
 def edit(id):
@@ -37,14 +40,16 @@ def edit(id):
                 "name": request.form["name"],
                 "latitude": float(request.form["latitude"]),
                 "longitude": float(request.form["longitude"]),
-                "description": request.form["description"]
+                "description": request.form["description"],
+                "address": request.form["address"]  # Tambahan
             }}
         )
         return redirect(url_for("batik_place_bp.index"))
 
     return render_template("edit.html", place=place)
 
-@batik_place_bp.route("/batik-places/delete/<id>")
+
+@batik_place_bp.route("/batik-places/delete/<id>", methods=["POST"])
 def delete(id):
     current_app.mongo.db.batik_places.delete_one({"_id": ObjectId(id)})
     return redirect(url_for("batik_place_bp.index"))

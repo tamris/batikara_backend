@@ -3,6 +3,7 @@ from bson import ObjectId
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.utils import secure_filename
+# from werkzeug.security import check_password_hash, generate_password_hash
 
 
 user_bp = Blueprint("user", __name__, url_prefix="/user")
@@ -78,3 +79,45 @@ def delete_profile():
         return jsonify({"message": "User tidak ditemukan"}), 404
 
     return jsonify({"message": "User deleted successfully"}), 200
+
+
+@user_bp.route("/profile/change-password", methods=["POST"])
+@jwt_required()
+def change_password():
+    user_id = get_jwt_identity()
+    data = request.get_json()
+
+    current_password = data.get("current_password")
+    new_password = data.get("new_password")
+    confirm_password = data.get("confirm_password")
+
+    # Validasi input
+    if not current_password or not new_password or not confirm_password:
+        return jsonify({"message": "Semua field wajib diisi"}), 400
+
+    if new_password != confirm_password:
+        return jsonify({"message": "Password baru dan konfirmasi tidak cocok"}), 400
+
+    # Ambil user dari DB
+    user = current_app.mongo.db.users.find_one({"_id": ObjectId(user_id)})
+
+    if not user:
+        return jsonify({"message": "User tidak ditemukan"}), 404
+
+    bcrypt = current_app.bcrypt
+
+    # Pastikan password lama cocok
+    if not bcrypt.check_password_hash(user["password"], current_password):
+        return jsonify({"message": "Password saat ini salah"}), 401
+
+    # Hash password baru
+    hashed_pw = bcrypt.generate_password_hash(new_password).decode('utf-8')
+
+    # Update ke DB
+    current_app.mongo.db.users.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": {"password": hashed_pw}}
+    )
+
+    return jsonify({"message": "Password berhasil diubah"}), 200
+

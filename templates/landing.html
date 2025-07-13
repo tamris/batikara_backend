@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page BatikKara</title>
+  <link rel="stylesheet" href="static/css/style3.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <main>
+    <div class="big-wrapper light">
+      <img src="static/img/shape.png" alt="" class="shape" />
+
+      <!-- Header -->
+      <header>
+        <div class="container">
+          <div class="logo">
+            <img src="static/img/logo3.png" alt="Logo" />
+            <h3>BatikKara</h3>
+          </div>
+
+          <div class="links">
+            <ul>
+              {% if role == 'user' %}
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#contact">Contact</a></li>
+              {% else %}
+              <li><a href="#" onclick="alert('Silakan login terlebih dahulu')">About</a></li>
+              <li><a href="#" onclick="alert('Silakan login terlebih dahulu')">Features</a></li>
+              <li><a href="#" onclick="alert('Silakan login terlebih dahulu')">Contact</a></li>
+              {% endif %}
+              {% if role %}
+              <li><a href="{{ url_for('auth_web.logout') }}" class="btn">Logout</a></li>
+              {% else %}
+              <li><a href="{{ url_for('auth_web.login') }}" class="btn">Sign In</a></li>
+              {% endif %}
+            </ul>
+          </div>
+
+          <div class="overlay"></div>
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero Showcase -->
+      <div class="showcase-area">
+        <div class="container">
+          <div class="left">
+            <div class="big-title">
+              <h1>Embrace the Heritage,</h1>
+              <h1>Learn Batik Tegal Today.</h1>
+            </div>
+            <p class="text">
+              Kenali dan lestarikan kekayaan Batik Tegal bersama BatikKara.
+              Temukan nilai budaya, filosofi motif, dan kisah di balik setiap helai kain lokal kami.
+            </p>
+            <div class="cta">
+              {% if role == 'user' %}
+              <a href="static/apk/BatikKara.apk" class="btn" download>
+                <i class="fab fa-android"></i> Download apk BatikKara
+              </a>
+              {% else %}
+              <a href="#" class="btn" onclick="alert('Login diperlukan untuk mendownload aplikasi')">
+                <i class="fab fa-android"></i> Download apk BatikKara
+              </a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="right">
+            <img src="static/img/pembatik.png" alt="Person Image" class="person" />
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Flash Message -->
+      <div class="container" style="margin-top: 20px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for msg in messages %}
+            {% set category = msg[0] %}
+            {% set message = msg[1] %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+
+      <!-- About Section -->
+      {% if role == 'user' %}
+      <div class="showcase-area about" id="about">
+        <div class="container">
+          <div class="left">
+            <img src="static/img/about.png" alt="about image" class="about" />
+          </div>
+          <div class="right">
+            <div class="big-title">
+              <h1>About <span style="color: var(--mainColor);">BatikKara</span></h1>
+            </div>
+            <p class="text">
+              <strong>BatikKara</strong> memadukan keindahan budaya lokal dengan kekuatan kecerdasan buatan.
+              Melalui integrasi teknologi AI, aplikasi ini mampu merekomendasikan motif batik, mengenali pola,
+              dan menyajikan cerita budaya secara personal kepada setiap pengguna. Inovasi ini memperkuat pelestarian
+              Batik Tegal di era digital.
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Features Section -->
+      <section class="features-section" id="features">
+        {% if role == 'user' %}
+        <div class="container">
+          <h1 class="section-title">Fitur Unggulan</h1>
+          <p class="section-subtitle">Nikmati fitur-fitur terbaik dari BatikKara yang dirancang untuk Anda.</p>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="icon"><i class="fas fa-landmark"></i></div>
+              <h3>Menjelajahi Warisan Batik Tegal</h3>
+              <p>Temukan informasi sejarah, filosofi, dan keberagaman motif batik khas Tegal dalam satu genggaman.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon"><i class="fas fa-scroll"></i></div>
+              <h3>Pustaka Budaya</h3>
+              <p>Pelajari filosofi di balik setiap motif Batik Tegal secara mendalam dan interaktif.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon"><i class="fas fa-brain"></i></div>
+              <h3>Kecerdasan AI</h3>
+              <p>Gunakan kamera untuk mengenali motif batik secara langsung dengan bantuan kecerdasan buatan.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+              <h3>Temukan Lokasi Batik Terdekat</h3>
+              <p>Cari toko batik terdekat dengan fitur pemetaan interaktif yang terintegrasi langsung di aplikasi.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon"><i class="fas fa-images"></i></div>
+              <h3>Eksplorasi Galeri Batik Digital</h3>
+              <p>Lihat koleksi batik Tegalan dengan visual yang kaya, simpan favorit, dan dalami cerita di balik setiap motif.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon"><i class="fas fa-camera"></i></div>
+              <h3>Pengenalan Pola Batik</h3>
+              <p>Pelajari makna dan filosofi di balik setiap pola batik khas Tegal sebagai warisan budaya yang kaya nilai dan cerita.</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <div class="container">
+          <h1 class="contact-title">Hubungi Kami</h1>
+          <p class="contact-subtitle">Silakan tinggalkan pesan atau kunjungi kami langsung.</p>
+
+          <div class="contact-content">
+            <div class="contact-form">
+              <form action="/send-message" method="POST">
+                <div class="form-group">
+                  <label for="name">Nama</label>
+                  <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="message">Pesan</label>
+                  <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
+              </form>
+            </div>
+
+            <div class="contact-info">
+              <h2>Alamat Kami</h2>
+              <p><i class="fas fa-map-marker-alt"></i> Jl. Mataram No.9, Pesurungan Lor, Kec. Margadana, Kota Tegal,
+                Jawa Tengah 52147 </p>
+              <p><i class="fas fa-envelope"></i> info@batikkara.id</p>
+              <p><i class="fas fa-phone"></i> +62 858-7649-0269 / +62 813-9149-7365</p>
+
+              <div class="map-container">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.2355944184486!2d109.12085311437582!3d-6.925803169752563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7023d1471654b9%3A0x6d80855a45e0ac41!2sJl.%20Mataram%20No.9%2C%20Pesurungan%20Lor%2C%20Kec.%20Margadana%2C%20Kota%20Tegal%2C%20Jawa%20Tengah%2052147!5e0!3m2!1sen!2sid!4v1718964063154!5m2!1sen!2sid"
+                  width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+      </section>
+
+      <!-- Toggle -->
+      <div class="bottom-area">
+        <div class="container">
+          <button class="toggle-btn">
+            <i class="far fa-moon"></i>
+            <i class="far fa-sun"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="static/img/logo3.png" alt="BatikKara Logo" />
+        </div>
+        <p>Menghidupkan kembali warisan Batik Tegal melalui teknologi dan cerita lokal yang bermakna.</p>
+        <a href="static/apk/BatikKara.apk" class="apk-button" download>
+          <i class="fas fa-download"></i> BatikKara.apk
+        </a>
+      </div>
+      <div class="footer-section">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#about">Tentang Kami</a></li>
+          <li><a href="#features">Fitur</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <h4>Unduh Aplikasi</h4>
+        <a href="static/apk/BatikKara.apk">BatikKara.apk</a>
+      </div>
+      <div class="footer-section">
+        <h4>Ikuti Kami</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 BatikKara. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="static/js/app2.js"></script>
+</body>
+
+</html>

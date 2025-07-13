@@ -1,24 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+
 <head>
-    <title>Daftar Artikel</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Artikel - Admin BatikKara</title>
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/articles.css') }}" />
 </head>
+
 <body>
-    <h1>Daftar Artikel</h1>
-    <a href="{{ url_for('article.web_article_create') }}">+ Tambah Artikel</a>
-    <ul>
-        {% for article in articles %}
-            <li>
-                <h3>{{ article.title }}</h3>
-                <img src="{{ article.image_url }}" width="100" />
-                <p>{{ article.description }}</p>
-                <p><small>Dibuat: {{ article.created_at }}</small></p>
-                <a href="{{ url_for('article.web_article_edit', id=article.id) }}">Edit</a>
-                <form action="{{ url_for('article.web_article_delete', id=article.id) }}" method="POST" style="display:inline;">
-                    <button type="submit">Hapus</button>
-                </form>
+
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">Admin BatikKara</span>
+        </a>
+        <ul class="side-menu top">
+            <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span
+                        class="text">Dashboard</span></a></li>
+            <li class="menu-label"><span class="text">Master Data</span></li>
+            <li><a href="{{ url_for('gallery.web_gallery_index') }}"><i class='bx bxs-shopping-bag-alt'></i><span
+                        class="text">Data Batik</span></a></li>
+            <li><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video''></i><span class="text">Data
+                        Video</span></a>
             </li>
-        {% endfor %}
-    </ul>
+            <li class="active"><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span
+                        class="text">Data
+                        Artikel</span></a></li>
+            <li><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span
+                        class="text">Data Event</span></a></li>
+            <li><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map'></i><span class="text">Data
+                        Mapping</span></a></li>
+            <li><a href="{{ url_for('auth_web.logout') }}" class="logout"><i class='bx bxs-log-out-circle'></i><span
+                        class="text">Logout</span></a></li>
+        </ul>
+    </section>
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <a href="#" class="nav-link">Data Artikel</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search article..." />
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden />
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification"><i class='bx bxs-bell'></i><span class="num">8</span></a>
+            <a href="#" class="profile"><img src="{{ url_for('static', filename='img/people.png') }}"
+                    alt="profile" /></a>
+        </nav>
+
+        <!-- MAIN -->
+        <main>
+
+            <!-- Flash Message Pop-up -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div id="popup" class="popup show">
+                {% for category, message in messages %}
+                <div class="popup-content {{ category }}">
+                    <span class="popup-icon">&#10003;</span>
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="head-title">
+                <div class="left">
+                    <h1>Daftar Artikel</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="{ url_for('dashboard.admin_dashboard') }">Dashboard</a></li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li><a class="active" href="#">Data Artikel</a></li>
+                    </ul>
+                </div>
+                <a href="{{ url_for('article.web_article_create') }}" class="btn-download">
+                    <i class='bx bx-plus'></i>
+                    <span class="text">Tambah Artikel</span>
+                </a>
+            </div>
+
+            <!-- TABEL ARTIKEL -->
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Daftar Artikel</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Judul</th>
+                                <th>Deskripsi</th>
+                                <th>Waktu</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in articles %}
+                            <tr>
+                                <td>
+                                    {% if item.image_url %}
+                                    <img src="{{ item.image_url }}" width="100" alt="Foto Artikel">
+                                    {% else %}
+                                    <span style="color: gray;">Tidak ada foto</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.title }}</td>
+                                <td class="article-desc">{{ item.description }}</td>
+                                <td>{{ item.created_at }}</td>
+
+                                <td>{{ item.judul }}</td>
+                                <td class="article-desc">{{ item.deskripsi }}</td>
+                                <td>{{ item.waktu if item.waktu else "-" }}</td>
+                                <td>
+                                    <!-- Tombol Edit -->
+                                    <a href="{{ url_for('article.web_article_edit', id=item.id) }}"
+                                        class="btn-action btn-edit">
+                                        <i class='bx bx-edit-alt'></i> Edit
+                                    </a>
+
+                                    <!-- Tombol Delete -->
+                                    <form action="{{ url_for('article.web_article_delete', id=item.id) }}" method="POST"
+                                        style="display:inline;">
+                                        <button type="submit" class="btn-action btn-delete"
+                                            onclick="return confirm('Yakin ingin menghapus artikel ini?')">
+                                            <i class='bx bx-trash'></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5">Belum ada data artikel.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Script auto-hide popup -->
+    <script>
+        setTimeout(() => {
+            const popup = document.getElementById('popup');
+            if (popup) popup.style.display = 'none';
+        }, 3000);
+    </script>
+
 </body>
+
 </html>

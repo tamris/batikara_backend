@@ -1,25 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+
 <head>
-    <title>Edit Galeri Batik</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Galeri Batik - Admin BatikKara</title>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/event-create.css') }}" />
 </head>
+
 <body>
-    <h1>Edit Galeri Batik</h1>
-    <form action="{{ url_for('gallery.web_gallery_edit', id=gallery.id) }}" method="post" enctype="multipart/form-data">
-        <label>Nama Batik:</label><br>
-        <input type="text" name="nama_batik" value="{{ gallery.nama_batik }}" required><br><br>
 
-        <label>Deskripsi:</label><br>
-        <textarea name="deskripsi" rows="4" cols="50" required>{{ gallery.deskripsi }}</textarea><br><br>
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">Admin BatikKara</span>
+    </a>
+    <ul class="side-menu top">
+      <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
+      <li class="menu-label"><span class="text">Master Data</span></li>
+      <li class="active"><a href="{{ url_for('gallery.web_gallery_index') }}"><i class='bx bxs-shopping-bag-alt'></i><span class="text">Data Batik</span></a></li>
+      <li><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video'></i><span class="text">Data Video</span></a></li>
+      <li><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span class="text">Data Artikel</span></a></li>
+      <li><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span class="text">Data Event</span></a></li>
+      <li><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map'></i><span class="text">Data Mapping</span></a></li>
+      <li><a href="/logout" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
+    </ul>
+  </section>
 
-        <label>Gambar Saat Ini:</label><br>
-        <img src="{{ gallery.image }}" width="150"><br><br>
+  <!-- CONTENT -->
+  <section id="content">
+    <nav>
+      <i class='bx bx-menu'></i>
+      <a href="#" class="nav-link">Edit Galeri Batik</a>
+    </nav>
 
-        <label>Ganti Gambar (opsional):</label><br>
-        <input type="file" name="image" accept="image/*"><br><br>
+    <main>
+      <div class="container">
+        <h2>Edit Galeri Batik</h2>
 
-        <button type="submit">Update</button>
-        <a href="{{ url_for('gallery.web_gallery_index') }}">Batal</a>
-    </form>
+        <!-- FORM EDIT -->
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('gallery.web_gallery_edit', id=gallery.id) }}" class="form-box">
+
+          <label for="nama_batik">Motif Batik</label>
+          <input type="text" id="nama_batik" name="nama_batik" value="{{ gallery.nama_batik }}" required>
+
+          <label for="deskripsi">Deskripsi</label>
+          <textarea id="deskripsi" name="deskripsi" rows="4" required>{{ gallery.deskripsi }}</textarea>
+
+          <label for="image">Foto Batik (opsional)</label><br>
+          {% if gallery.image %}
+            <img src="{{ gallery.image }}" alt="Foto Batik" width="120" style="margin-bottom:10px;"><br>
+          {% endif %}
+          <input type="file" id="image" name="image" accept="image/*">
+
+          <div class="actions">
+            <button type="submit" class="btn-submit"><i class='bx bx-check'></i> Simpan Perubahan</button>
+            <a href="{{ url_for('gallery.web_gallery_index') }}" class="btn-cancel">Batal</a>
+          </div>
+        </form>
+
+      </div>
+    </main>
+  </section>
+
 </body>
+
 </html>

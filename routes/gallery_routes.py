@@ -13,8 +13,18 @@ def get_galleries():
 # INDEX - Web
 @gallery_bp.route('/web/gallery')
 def web_gallery_index():
-    galleries = current_app.mongo.db.gallery.find()
-    return render_template('gallery/index.html', galleries=[gallery_serializer(g) for g in galleries])
+    query = request.args.get('q', '').strip()
+    if query:
+        galleries = current_app.mongo.db.gallery.find({
+            "nama_batik": {"$regex": query, "$options": "i"}
+        })
+    else:
+        galleries = current_app.mongo.db.gallery.find()
+
+    return render_template(
+        'gallery/index.html',
+        galleries=[gallery_serializer(g) for g in galleries]
+    )
 
 # CREATE
 @gallery_bp.route('/web/gallery/create', methods=['GET', 'POST'])

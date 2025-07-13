@@ -1,9 +1,86 @@
-<h2>Edit Lokasi Batik</h2>
-<form method="post">
-  Nama: <input type="text" name="name" value="{{ place.name }}"><br>
-  Latitude: <input type="text" name="latitude" value="{{ place.latitude }}"><br>
-  Longitude: <input type="text" name="longitude" value="{{ place.longitude }}"><br>
-  Deskripsi: <input type="text" name="description" value="{{ place.description }}"><br>
-  <button type="submit">Update</button>
-</form>
-<a href="{{ url_for('batik_place_bp.index') }}">Kembali</a>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Galeri Batik - Admin BatikKara</title>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/event-create.css') }}" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">Admin BatikKara</span>
+    </a>
+    <ul class="side-menu top">
+      <li><a href="{{ url_for('dashboard.admin_dashboard') }}"><i class='bx bxs-dashboard'></i><span
+            class="text">Dashboard</span></a></li>
+      <li class="menu-label"><span class="text">Master Data</span></li>
+      <li><a href="{{ url_for('gallery.web_gallery_index') }}"><i class='bx bxs-shopping-bag-alt'></i><span
+            class="text">Data Batik</span></a></li>
+      <li><a href="{{ url_for('video_bp.index') }}"><i class='bx bxs-video'></i><span class="text">Data Video</span></a>
+      </li>
+      <li><a href="{{ url_for('article.web_article_index') }}"><i class='bx bxs-news'></i><span class="text">Data
+            Artikel</span></a></li>
+      <li><a href="{{ url_for('event_web.event_index') }}"><i class='bx bxs-calendar-event'></i><span class="text">Data
+            Event</span></a></li>
+      <li class="active"><a href="{{ url_for('batik_place_bp.index') }}"><i class='bx bxs-map'></i><span
+            class="text">Data Mapping</span></a></li>
+      <li><a href="/logout" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CONTENT -->
+  <section id="content">
+    <nav>
+      <i class='bx bx-menu'></i>
+      <a href="#" class="nav-link">Edit Lokasi Batik</a>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h2>Edit Lokasi Batik Batik</h2>
+
+        <!-- FORM EDIT -->
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('batik_place_bp.edit', id=place._id) }}"
+          class="form-box">
+
+          <label for="lokasi">Nama</label>
+          <input type="text" id="lokasi" name="name" value="{{ place.name }}" required>
+
+          <label for="latitude">Latitude</label>
+          <textarea id="latitude" name="latitude" rows="2" required>{{ place.latitude }}</textarea>
+
+          <label for="longitude">Longitude</label>
+          <input type="text" name="longitude" value="{{ place.longitude }}" required>
+
+          <label for="deskripsi">Deskripsi</label>
+          <input type="text" name="description" value="{{ place.description }}" required>
+          
+          <label for="address">Alamat</label>
+          <input type="text" name="address" value="{{ place.address }}" required>
+
+
+          <div class="actions">
+            <button type="submit" class="btn-submit"><i class='bx bx-check'></i> Simpan Perubahan</button>
+            <a href="{{ url_for('batik_place_bp.index') }}" class="btn-cancel">Batal</a>
+          </div>
+        </form>
+
+
+      </div>
+    </main>
+  </section>
+
+</body>
+
+</html>
