@@ -1,0 +1,91 @@
+.table-data table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed;
+}
+
+.table-data th, .table-data td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table-data th {
+  font-weight: bold;
+  color: #333;
+}
+
+.table-data td img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.table-data td {
+  font-size: 14px;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.table-data td:nth-child(1) {
+  width: 70px;
+}
+
+.table-data td:nth-child(2) {
+  width: 180px;
+}
+
+.table-data td:nth-child(3) {
+  width: 100px;
+}
+
+.table-data td:nth-child(4) {
+  width: 250px;
+}
+
+.table-data td:nth-child(5) {
+  width: auto;
+  max-width: 350px;
+}
+
+.table-data td:nth-child(6) {
+  width: 120px;
+}
+
+.col-aksi .aksi-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.btn-action {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-edit {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+}
+
+.table-data .ellipsis-3-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

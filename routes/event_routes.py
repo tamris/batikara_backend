@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash, session, current_app
 from bson import ObjectId
 import os
 from models.event_model import (
@@ -105,3 +105,25 @@ def delete_event_route(id):
     delete_event(id)
     flash("Event berhasil dihapus!", "info")
     return redirect(url_for("event_web.event_index"))
+
+
+@event_bp.route("/api/events", methods=["GET"])
+def api_get_events():
+    events = get_all_events()
+
+    # Format event agar bisa dibaca Flutter (misalnya ubah _id ke string)
+    event_list = []
+    for event in events:
+        event_list.append({
+            "id": str(event["_id"]),
+            "judul": event["judul"],
+            "waktu": event["waktu"],  # diasumsikan sudah string
+            "lokasi": event["lokasi"],
+            "deskripsi": event["deskripsi"],
+            "foto": event["foto"],  # jika butuh URL lengkap, bisa gabungkan dengan domain/static/uploads
+        })
+
+    return jsonify({
+        "success": True,
+        "data": event_list
+    })

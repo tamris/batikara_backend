@@ -1,0 +1,63 @@
+/* Struktur tabel */
+table th,
+table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+/* Kolom Nama */
+.col-nama {
+  width: 200px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* Koordinat */
+.col-koordinat {
+  width: 160px;
+  font-family: monospace;
+  word-break: break-word;
+}
+
+/* Deskripsi - max 3 line */
+.col-deskripsi {
+  max-width: 460px;
+}
+.deskripsi-box {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.5em;
+}
+
+/* Aksi - pas kanan */
+.col-aksi {
+  width: 160px;
+  text-align: right;
+  padding-right: 24px;
+}
+.aksi-wrapper {
+  display: inline-flex;
+  gap: 8px;
+}
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+.btn-edit {
+  background-color: #3b82f6;
+  color: white;
+}
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+}

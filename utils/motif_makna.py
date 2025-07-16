@@ -1,0 +1,36 @@
+motif_makna = {
+    # Makna yang sudah ada sebelumnya
+    'Beras Mawur': 'Motif ini menggambarkan butiran beras yang tumpah, melambangkan harapan akan kehidupan yang berkecukupan dan panen yang melimpah. Bagi masyarakat Tegal, motif ini sangat dekat dengan kehidupan sehari-hari dan menjadi doa agar selalu diberikan rezeki yang cukup.',
+    'Cempaka Mulya': 'Melambangkan keindahan, kemurnian, dan keanggunan. Bunga cempaka yang menjadi pusat motif ini sering dikaitkan dengan sifat-sifat baik seperti kesucian hati dan ketulusan. Selain itu, motif ini juga mengandung makna akan kehidupan yang abadi dan keindahan alam.',
+    'Cempaka Putih': 'Motif ini menggambarkan keindahan dan kesucian hati. Bunga cempaka putih, yang menjadi inspirasi utama motif ini, sejak lama dianggap sebagai simbol kemurnian dan kesucian dalam budaya Jawa. Warna putihnya yang menawan dan bentuknya yang anggun menjadi representasi dari keindahan yang abadi',
+    'Ciprat': 'Melambangkan kebebasan dan spontanitas dalam kehidupan.',
+    'Gribigan': 'Motif ini menggambarkan kehidupan sehari-hari masyarakat Tegal yang sangat erat dengan alam. Motif Gribigan terinspirasi dari pola anyaman bambu yang biasa digunakan untuk membuat dinding rumah atau pagar. Pola-pola geometris yang dihasilkan dari anyaman bambu ini kemudian diadaptasi menjadi motif batik yang unik dan menarik.',
+    'Jago Mogok': 'Motif ini menggambarkan kebebasan para perajin batik untuk berekspresi tanpa terikat oleh aturan baku. Dengan bentuk yang abstrak dan tidak konvensional, motif Jago Mogok menghadirkan nuansa yang segar dan berbeda dari motif-motif batik lainnya.',
+    'Kangkung': 'Melambangkan kesuburan dan kemampuan bertahan dalam berbagai kondisi.',
+    'Kawung': 'Motif Kawung Tegalan menyimbolkan harapan akan kesempurnaan hidup, kemurnian hati, dan kesucian pikiran, sambil tetap menghargai kearifan lokal dan semangat pantang menyerah masyarakat pesisir Tegal.',
+    'Kembang Pacar': 'Motif ini melambangkan keindahan abadi dan kasih sayang yang tak terhingga. Motif kembang pacar, salah satu motif batik khas Tegal, terinspirasi dari bunga pacar yang sering digunakan untuk mewarnai kulit. Bunga pacar yang digambarkan dengan begitu anggun dan menawan pada kain batik, menjadi simbol kecantikan alami seorang perempuan.',
+    'Lompongan': 'Melambangkan keteraturan dan keseimbangan dalam hidup.',
+    'Megamendung': 'Melambangkan harapan akan kesuburan dan kesejahteraan.',
+    'Putri Mahkota': 'Motif yang menggambarkan sosok putri dengan mahkota ini melambangkan sifat-sifat luhur yang diharapkan dimiliki oleh pemakainya, terutama kaum perempuan. Mahkota dalam motif ini melambangkan sikap mengayomi dan melindungi, sementara penggunaan warna-warna kontras namun harmonis seperti coklat, biru, dan putih mencerminkan perpaduan antara ketegasan dan kasih sayang.',
+    'Remekan': 'Melambangkan keunikan dan keindahan dalam ketidaksempurnaan.',
+    'Sekar Jagad': 'Motif ini melambangkan keberagaman yang harmonis dalam kehidupan, seperti tercermin dalam pola-pola geometris dan flora yang disusun dalam bidang tak beraturan. Dalam konteks Tegal, motif ini menggambarkan keanekaragaman kehidupan masyarakat pesisir yang penuh warna namun tetap harmonis.',
+    'Sidomukti': 'Motif ini melambangkan harapan dan doa agar pemakainya mencapai kemuliaan dan kesejahteraan dalam hidup. Bagi pasangan pengantin, motif ini diharapkan membawa masa depan yang baik dan penuh kebahagiaan.',
+    'Sidomulyo': 'Motif Sidomulyo mengandung makna dan harapan akan kemuliaan, kemakmuran, dan kebahagiaan bagi pemakainya, terutama saat digunakan dalam upacara pernikahan. Nama "Sidomulyo" sendiri berasal dari kata "sido" (jadi/menjadi) dan "mulyo" (mulia), yang secara keseluruhan bermakna "menjadi mulia".',
+    'Teripang': 'Melambangkan kemampuan beradaptasi dalam berbagai situasi.',
+    'Watu Pecah': 'Motif ini terinspirasi dari batu karang yang terpecah-pecah di sepanjang pesisir pantai utara Tegal, yang melambangkan ketangguhan dan kekuatan dalam menghadapi berbagai tantangan hidup. Seperti batu karang yang tetap kokoh meski dihantam ombak, motif ini mengandung filosofi bahwa manusia harus memiliki keteguhan hati dan ketahanan dalam menghadapi berbagai cobaan kehidupan.',
+
+    # Menambahkan makna untuk motif baru
+    'Cungkilan': 'Motif ini terinspirasi dari aktivitas mencungkil atau menggali, melambangkan ketekunan dan kerja keras dalam mencari rezeki. Motif ini menggambarkan semangat pantang menyerah masyarakat Tegal dalam mencari nafkah.',
+    'Galaran': 'Motif yang terinspirasi dari bentuk pagar bambu atau kayu (galar), melambangkan perlindungan dan batas yang tegas namun tetap memberi ruang untuk berkembang.',
+    'Grandil': 'Motif ini melambangkan kebijaksanaan dan kematangan dalam berpikir. Terinspirasi dari bentuk buah yang matang, motif ini mengandung harapan agar pemakainya selalu bijak dalam mengambil keputusan.',
+    'Irengan': 'Motif yang menggunakan dominasi warna gelap, melambangkan kedalaman makna dan filosofi hidup. Mengajarkan bahwa dalam kegelapan selalu ada cahaya yang memberi harapan.',
+    'Kacangan': 'Terinspirasi dari tanaman kacang yang merambat dan berkembang, melambangkan pertumbuhan dan perkembangan yang terus menerus dalam kehidupan.',
+    'Kuku Macan': 'Motif yang terinspirasi dari kuku macan, melambangkan kekuatan dan keberanian. Mengandung harapan agar pemakainya memiliki keteguhan hati seperti macan.',
+    'Parang': 'Motif yang menggambarkan ombak laut yang berkesinambungan, melambangkan semangat yang tak pernah padam dan kontinuitas dalam menjalani kehidupan.',
+    'Pasiran': 'Terinspirasi dari butiran pasir di pesisir pantai, melambangkan kesederhanaan namun memiliki makna yang dalam tentang kesatuan dan kebersamaan.',
+    'Poci Tahu Aci': 'Motif poci dan tahu aci yang menjadi pusat perhatian pada batik ini melambangkan keramahan, kehangatan, dan kelezatan khas kota Tegal. Poci sebagai simbol minuman teh poci yang manis dan kental, serta tahu aci sebagai makanan ringan yang populer, menggambarkan identitas lokal dan menjadi daya tarik tersendiri bagi para pencinta batik.',
+    'Salem': 'Motif yang berasal dari daerah Salem di Tegal, melambangkan kearifan lokal dan pelestarian warisan budaya.',
+    'Sawatan': 'Motif yang menggambarkan gerakan memotong atau menyawat, melambangkan ketegasan dalam mengambil keputusan dan keberanian dalam menghadapi tantangan.',
+    'Sisik Melik': 'Terinspirasi dari sisik ikan yang berkilau, melambangkan keindahan dalam kesederhanaan dan harapan akan kehidupan yang cemerlang.',
+    'Bukan Batik Tegalan': 'Motif yang terdeteksi bukan termasuk Batik Tegalan. Silakan coba lagi dengan motif batik khas Tegal lainnya.'
+}

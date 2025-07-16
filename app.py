@@ -17,6 +17,7 @@ from routes.event_routes import event_bp
 from routes.video_routes import video_bp
 from routes.batik_place_routes import batik_place_bp
 from routes.reset_password_routes import reset_bp
+from routes.predict_route import predict_bp 
 
 app = Flask(__name__)
 CORS(app)
@@ -47,7 +48,7 @@ app.register_blueprint(video_bp)
 app.register_blueprint(event_bp)
 app.register_blueprint(batik_place_bp)
 app.register_blueprint(reset_bp)
-
+app.register_blueprint(predict_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

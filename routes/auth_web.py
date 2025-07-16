@@ -17,7 +17,7 @@ def index():
 # ========================
 # LOGIN: Admin & User
 # ========================
-@auth_web_bp.route("/login", methods=["GET", "POST"])
+@auth_web_bp.route("/web/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form.get("username")
